@@ -40,6 +40,8 @@ class Chart extends ConsumerWidget {
       orElse: () => 0.0,
     );
 
+    value = value.clamp(0.0, 1.0);
+
     final axis = appSettings.channelSettings[channelId].profileAxis;
     final dataPoints = axis.dataPoints;
     const margin = 16.0;

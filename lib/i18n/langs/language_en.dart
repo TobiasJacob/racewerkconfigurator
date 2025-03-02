@@ -93,7 +93,7 @@ class LanguageEn extends Languages {
       case ButtonUsage.toggle:
         return "Toggle";
       default:
-        return "Unbenutzt";
+        return "Unused";
     }
   }
 
@@ -162,7 +162,9 @@ class LanguageEn extends Languages {
   }
 
   @override
-  String get editChannel => "Edit channel";
+  String editChannel(ChannelUsage usage) {
+    return "Edit ${channelUsage(usage)}";
+  }
 
   @override
   String get usageLabel => "Usage";
@@ -187,6 +189,9 @@ class LanguageEn extends Languages {
 
   @override
   String get index => "Index";
+
+  @override
+  String get autoCalibration => "Auto Calibration";
 
   @override
   String preset(int index)

@@ -60,7 +60,7 @@ abstract class Languages {
   String alreadyInUse(ChannelUsage usage);
 
   // Channel Settings
-  String get editChannel;
+  String editChannel(ChannelUsage usage);
   String get usageLabel;
   String get minValue;
   String get maxValue;
@@ -69,6 +69,7 @@ abstract class Languages {
   String get inverted;
   String get reset;
   String get index;
+  String get autoCalibration;
 
   // Profile Axis
   String preset(int index);

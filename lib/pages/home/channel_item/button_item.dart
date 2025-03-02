@@ -107,6 +107,9 @@ class _ButtonItemState extends ConsumerState<ButtonItem> {
                     }
                   },
                   initialSelection: buttonSettings.usage,
+                  requestFocusOnTap: false,
+                  enableSearch: false,
+                  controller: TextEditingController(text: lang.buttonUsage(buttonSettings.usage)),
                 ),
               ),
             ),

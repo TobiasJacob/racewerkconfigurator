@@ -40,11 +40,11 @@ class ChartPainter extends CustomPainter {
     paint = Paint()
       ..color = const Color.fromRGBO(80, 254, 0, 1)
       ..strokeWidth = 2;
-    final x = currentValue;
+    final x = currentValue.clamp(0.0, 1.0);
     p1 = Offset(x * width + margin, margin);
     p2 = Offset(x * width + margin, height + margin);
     canvas.drawLine(p1, p2, paint);
-    final y = axis.getY(x);
+    final y = axis.getY(x).clamp(0.0, 1.0);
     p1 = Offset(margin, height * (1.0 - y) + margin);
     p2 = Offset(width + margin, height * (1.0 - y) + margin);
     canvas.drawLine(p1, p2, paint);

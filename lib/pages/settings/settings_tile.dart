@@ -12,7 +12,7 @@ class SettingsTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(
-          flex: 1,
+          flex: 3,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(

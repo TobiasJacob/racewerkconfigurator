@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gcrdeviceconfigurator/data/activate_settings.dart';
 import 'package:gcrdeviceconfigurator/data/channel_provider.dart';
 import 'package:gcrdeviceconfigurator/data/profile_axis.dart';
 import 'package:gcrdeviceconfigurator/data/settings_provider.dart';
 import 'package:gcrdeviceconfigurator/dialogs/ok_dialog.dart';
+import 'package:gcrdeviceconfigurator/pages/home/channel_item/editbox.dart';
 import 'package:gcrdeviceconfigurator/pages/home/channels/chart/chart.dart';
 import 'package:gcrdeviceconfigurator/pages/settings/settings_tile.dart';
+import 'package:gcrdeviceconfigurator/usb/usb_data.dart';
 import 'package:gcrdeviceconfigurator/usb/usb_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -19,76 +22,64 @@ class ChannelPage extends ConsumerStatefulWidget {
 }
 
 class _ChannelPageState extends ConsumerState<ChannelPage> {
-  TextEditingController minController = TextEditingController();
-  TextEditingController maxController = TextEditingController();
-
   bool autoUpdate = false;
 
   @override
   void initState() {
     super.initState();
 
-    setState(() {
-      final channel = ref.read(channelProvider);
-
-      minController.text = channel.minValue.toString();
-      maxController.text = channel.maxValue.toString();
-    });
+    // setState(() {
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
     final lang = Languages.of(context);
+    final channelId = ref.watch(channelIdProvider);
     final channel = ref.watch(channelProvider);
     final usbStatus = ref.watch(usbProvider);
     final settingsNotifier = ref.watch(settingsProvider.notifier);
 
-    final currentValue = usbStatus.maybeWhen(
+    final appSettings = ref.watch(settingsProvider);
+    final currentValues = usbStatus.maybeWhen(
       data: (data) => data.maybeMap(
-        connected: (usbStatus) =>
-            usbStatus.currentValues[ref.read(channelIdProvider)],
+        connected: (usbStatus) => usbStatus.currentValues,
         orElse: () => null,
       ),
       orElse: () => null,
     );
+    final rawValue = currentValues?[channelId];
+    final calibratedValueX = currentValues != null
+        ? parseValue(appSettings, currentValues, channelId)
+        : null;
+    final calibratedValue = calibratedValueX != null
+        ? appSettings.channelSettings[channelId].profileAxis
+            .getY(calibratedValueX)
+        : null;
 
-    updateValues(int? minValue, int? maxValue) {
-      setState(() {
-        var updatedChannel = channel;
-        if (minValue != null && maxValue != null) {
-          // Both values are set simultaneously so that the min value is always smaller than the max value
-          updatedChannel = channel.updateMinMaxValue(minValue, maxValue);
-          minController.text = minValue.toString();
-          maxController.text = maxValue.toString();
-        } else if (minValue != null) {
-          updatedChannel = channel.updateMinValue(minValue);
-          minController.text = minValue.toString();
-        } else if (maxValue != null) {
-          updatedChannel = channel.updateMaxValue(maxValue);
-          maxController.text = maxValue.toString();
-        }
-        if (updatedChannel != channel) {
-          settingsNotifier.updateChannel(updatedChannel);
-        }
-      });
-    }
+    final rawValueConverted = rawValue != null ? (rawValue * 100 ~/ 4096) : null;
 
     if (autoUpdate) {
-      if (currentValue != null &&
-          currentValue < channel.minValue &&
-          currentValue > channel.maxValue) {
+      if (rawValueConverted != null &&
+          rawValueConverted < channel.minValue &&
+          rawValueConverted > channel.maxValue) {
         Future(() {
-          updateValues(currentValue, currentValue);
+          settingsNotifier.update(appSettings.updateChannel(
+              channelId, channel.updateMinMaxValue(rawValueConverted, rawValueConverted)));
+          // await activateSettings(context, ref);
+          // await appSettingsNotifier.save();
         });
       }
-      if (currentValue != null && currentValue < channel.minValue) {
+      if (rawValueConverted != null && rawValueConverted < channel.minValue) {
         Future(() {
-          updateValues(currentValue, null);
+          settingsNotifier.update(appSettings.updateChannel(
+              channelId, channel.updateMinValue(rawValueConverted)));
         });
       }
-      if (currentValue != null && currentValue > channel.maxValue) {
+      if (rawValueConverted != null && rawValueConverted > channel.maxValue) {
         Future(() {
-          updateValues(null, currentValue);
+          settingsNotifier.update(appSettings.updateChannel(
+              channelId, channel.updateMaxValue(rawValueConverted)));
         });
       }
     }
@@ -105,89 +96,74 @@ class _ChannelPageState extends ConsumerState<ChannelPage> {
         },
         child: Scaffold(
           appBar: AppBar(
-            title: Text(lang.editChannel),
+            title: Text(lang.editChannel(channel.usage)),
           ),
           body: Column(
             children: [
               Column(
                 children: [
-                  SettingsTile(
-                      title: lang.minValue,
-                      child: FocusScope(
-                        onFocusChange: (value) {
-                          if (value) {
-                            return;
-                          }
-                          try {
-                            final valueInt = int.parse(minController.text);
-                            updateValues(valueInt, null);
-                          } catch (e) {
-                            showOkDialog(context, lang.error, "$e");
-                            updateValues(channel.minValue,
-                                null); // Reset to previous value
-                          }
-                        },
-                        child: TextField(
-                          controller: minController,
-                        ),
-                      )),
-                  SettingsTile(
-                      title: lang.maxValue,
-                      child: FocusScope(
-                        onFocusChange: (value) {
-                          if (value) {
-                            return;
-                          }
-                          try {
-                            final valueInt = int.parse(maxController.text);
-                            updateValues(null, valueInt);
-                          } catch (e) {
-                            showOkDialog(context, lang.error, "$e");
-                            updateValues(null,
-                                channel.maxValue); // Reset to previous value
-                          }
-                        },
-                        child: TextField(
-                          controller: maxController,
-                        ),
-                      )),
-                  SettingsTile(
-                      title: lang.inverted,
-                      child: Checkbox(
-                          value: channel.inverted,
-                          onChanged: (value) {
-                            updateValues(null, null);
-                            settingsNotifier.updateChannel(
-                                channel.updateInverted(value ?? false));
-                          })),
-                  SettingsTile(
-                    title: lang.currentValue,
-                    child: Column(
-                      children: [
-                        Text(currentValue.toString()),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text("Auto calibration"),
-                            Checkbox(
+                  Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        children: [
+                          SettingsTile(
+                            title: lang.rawValue,
+                            child: SizedBox(
+                              child: Text(
+                                  "${(rawValue != null ? rawValue * 100 ~/ 4096 : lang.nSlashA).toString()}%"),
+                            ),
+                          ),
+                          SettingsTile(
+                              title: lang.minValue,
+                              child: ChannelMinField(channelId: channelId)),
+                          SettingsTile(
+                              title: lang.maxValue,
+                              child: ChannelMaxField(channelId: channelId)),
+                          SettingsTile(
+                              title: lang.inverted,
+                              child: Checkbox(
+                                  value: channel.inverted,
+                                  onChanged: (value) {
+                                    // updateValues(null, null);
+                                    settingsNotifier.updateChannel(
+                                        channel.updateInverted(value ?? false));
+                                  })),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        children: [
+                          SettingsTile(
+                            title: lang.currentValue,
+                            child: SizedBox(
+                              child: Text(
+                                  "${(calibratedValue != null ? (calibratedValue * 100).round() : lang.nSlashA).toString()}%"),
+                            ),
+                          ),
+                          SettingsTile(
+                            title: lang.autoCalibration,
+                            child: Checkbox(
                                 value: autoUpdate,
                                 onChanged: (value) {
                                   if (value == true) {
-                                    updateValues(
-                                        ((currentValue ?? 0) - 1)
-                                            .clamp(0, 4095),
-                                        ((currentValue ?? 0) + 1)
-                                            .clamp(0, 4095));
+                                    settingsNotifier.update(
+                                        appSettings.updateChannel(
+                                            channelId,
+                                            channel.updateMinMaxValue(
+                                                ((rawValue ?? 2048) * 100 ~/ 4096 - 1).clamp(0, 100), ((rawValue ?? 2048) * 100 ~/ 4096 + 1).clamp(0, 100))));
                                   }
                                   setState(() {
                                     autoUpdate = value!;
                                   });
-                                })
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                                }),
+                          )
+                        ],
+                      ),
+                    )
+                  ]),
                 ],
               ),
               const VerticalDivider(),
@@ -200,20 +176,21 @@ class _ChannelPageState extends ConsumerState<ChannelPage> {
                       children: [
                         for (var i = 0; i < 6; i++)
                           MaterialButton(
-                              onPressed: () {
-                                settingsNotifier.updateChannel(channel
-                                    .updateProfileAxis(ProfileAxis.preset(i)));
-                              },
-                              child: Container(
-                                width: 80,
+                            onPressed: () {
+                              settingsNotifier.updateChannel(channel
+                                  .updateProfileAxis(ProfileAxis.preset(i)));
+                            },
+                            child: Container(
+                              width: 80,
                               height: 80,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage('images/preset${i+1}.png'),	
-                                      fit: BoxFit.fill),
-                                ),
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage('images/preset${i + 1}.png'),
+                                    fit: BoxFit.fill),
                               ),
-                              )
+                            ),
+                          )
                       ],
                     ),
                     const SizedBox(width: 20)

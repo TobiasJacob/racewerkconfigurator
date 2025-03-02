@@ -162,7 +162,9 @@ class LanguageDe extends Languages {
   }
 
   @override
-  String get editChannel => "Kanal bearbeiten";
+  String editChannel(ChannelUsage usage) {
+    return "${channelUsage(usage)} bearbeiten";
+  }
 
   @override
   String get usageLabel => "Funktion";
@@ -187,6 +189,9 @@ class LanguageDe extends Languages {
 
   @override
   String get index => "Index";
+
+  @override
+  String get autoCalibration => "Automatische Kalibrierung";
 
   @override
   String preset(int index)
