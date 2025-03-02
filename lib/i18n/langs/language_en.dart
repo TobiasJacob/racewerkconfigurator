@@ -24,6 +24,9 @@ class LanguageEn extends Languages {
   @override
   String get newProfile => "New Profile";
 
+  @override
+  String get profiles => "Profiles";
+
   // @override
   // String axisTileOptions(ProfileTileAction option) {
   //   switch (option) {

@@ -17,6 +17,7 @@ abstract class Languages {
 
   // Main Page
   String get newProfile;
+  String get profiles;
   // String axisTileOptions(ProfileTileAction option);
   String get addEmptyProfile;
   String get importProfile;

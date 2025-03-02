@@ -24,6 +24,9 @@ class LanguageDe extends Languages {
   @override
   String get newProfile => "Neues Profil";
 
+  @override
+  String get profiles => "Profile";
+
   // @override
   // String axisTileOptions(ProfileTileAction option) {
   //   switch (option) {

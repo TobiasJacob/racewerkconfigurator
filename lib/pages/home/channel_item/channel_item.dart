@@ -8,6 +8,7 @@ import 'package:gcrdeviceconfigurator/i18n/languages.dart';
 import 'package:gcrdeviceconfigurator/pages/home/channel_item/value_bar.dart';
 import 'package:gcrdeviceconfigurator/pages/home/channels/channel_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:number_inc_dec/number_inc_dec.dart';
 
 class ChannelItem extends ConsumerStatefulWidget {
   final int channelId;
@@ -91,14 +92,100 @@ class _ChannelItemState extends ConsumerState<ChannelItem> {
             ),
             SizedBox(
               width: 100,
-              child: Text(
-                channelSettings.minValue.toString(),
+              child: NumberInputWithIncrementDecrement(
+                controller: TextEditingController(),
+                initialValue: channelSettings.minValue,
+                onChanged: (value) async {
+                    if (value >= channelSettings.maxValue - 1) {
+                      return;
+                    }
+                    appSettingsNotifier.update(appSettings.updateChannel(
+                        widget.channelId,
+                        channelSettings.updateMinValue(value as int)));
+                    await activateSettings(context, ref);
+                    await appSettingsNotifier.save();
+                },
+                onIncrement: (value) async {
+                  if (value >= channelSettings.maxValue - 1) {
+                    return;
+                  }
+                  appSettingsNotifier.update(appSettings.updateChannel(
+                      widget.channelId,
+                      channelSettings.updateMinValue((value as int) + 1)));
+                  await activateSettings(context, ref);
+                  await appSettingsNotifier.save();
+                },
+                onDecrement: (value) async {
+                  if (value <= 0) {
+                    return;
+                  }
+                  appSettingsNotifier.update(appSettings.updateChannel(
+                      widget.channelId,
+                      channelSettings.updateMinValue((value as int) - 1)));
+                  await activateSettings(context, ref);
+                  await appSettingsNotifier.save();
+                },
+                min: 0,
+                max: channelSettings.maxValue - 1,
+                widgetContainerDecoration: const BoxDecoration(
+                  border: null,
+                ),
+                incIconDecoration: const BoxDecoration(
+                  border: null,
+                ),
+                decIconDecoration: const BoxDecoration(
+                  border: null,
+                ),
+                separateIcons: false,
               ),
             ),
             SizedBox(
               width: 100,
-              child: Text(
-                channelSettings.maxValue.toString(),
+              child: NumberInputWithIncrementDecrement(
+                controller: TextEditingController(),
+                initialValue: channelSettings.maxValue,
+                onChanged: (value) async {
+                    if (value <= channelSettings.minValue + 1) {
+                      return;
+                    }
+                    appSettingsNotifier.update(appSettings.updateChannel(
+                        widget.channelId,
+                        channelSettings.updateMaxValue(value as int)));
+                    await activateSettings(context, ref);
+                    await appSettingsNotifier.save();
+                },
+                onIncrement: (value) async {
+                  if (value >= 100) {
+                    return;
+                  }
+                  appSettingsNotifier.update(appSettings.updateChannel(
+                      widget.channelId,
+                      channelSettings.updateMaxValue((value as int) + 1)));
+                  await activateSettings(context, ref);
+                  await appSettingsNotifier.save();
+                },
+                onDecrement: (value) async {
+                  if (value <= channelSettings.minValue + 1) {
+                    return;
+                  }
+                  appSettingsNotifier.update(appSettings.updateChannel(
+                      widget.channelId,
+                      channelSettings.updateMaxValue((value as int) - 1)));
+                  await activateSettings(context, ref);
+                  await appSettingsNotifier.save();
+                },
+                min: channelSettings.minValue + 1,
+                max: 100,
+                widgetContainerDecoration: const BoxDecoration(
+                  border: null,
+                ),
+                incIconDecoration: const BoxDecoration(
+                  border: null,
+                ),
+                decIconDecoration: const BoxDecoration(
+                  border: null,
+                ),
+                separateIcons: false,
               ),
             ),
             SizedBox(

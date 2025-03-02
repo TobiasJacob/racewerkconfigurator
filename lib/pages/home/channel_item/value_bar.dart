@@ -50,7 +50,7 @@ class ValueBar extends ConsumerWidget {
             width: 100,
             child: CustomPaint(
                 painter: BarPainter(
-                    margin: 2, value: (rawValue ?? 0) / 4096.0, text: '${rawValue ?? lang.nSlashA}'),
+                    margin: 2, value: (rawValue ?? 0) / 4096.0, text: '${rawValue != null ? (rawValue * 100 ~/ 4096) : lang.nSlashA}%'),
                 child: Container()),
           ),
         ]);

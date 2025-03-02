@@ -12,9 +12,9 @@ class Channel with _$Channel {
   const Channel._();
 
   @Assert('minValue >= 0')
-  @Assert('minValue < 4096')
+  @Assert('minValue <= 100')
   @Assert('maxValue >= 0')
-  @Assert('maxValue < 4096')
+  @Assert('maxValue <= 100')
   @Assert('minValue < maxValue')
   factory Channel({
     required ChannelUsage usage,
@@ -24,7 +24,7 @@ class Channel with _$Channel {
     required bool inverted
   }) = _Channel;
 
-  factory Channel.empty() => Channel(usage: ChannelUsage.none, minValue: 0, maxValue: 4095, profileAxis: ProfileAxis.empty(), inverted: false);
+  factory Channel.empty() => Channel(usage: ChannelUsage.none, minValue: 0, maxValue: 100, profileAxis: ProfileAxis.empty(), inverted: false);
 
   factory Channel.fromJson(Map<String, Object?> json)
       => _$ChannelFromJson(json);

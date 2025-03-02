@@ -46,7 +46,7 @@ class _ButtonSimBarState extends ConsumerState<ButtonSimBar> {
 
     var buttonValue = rawValue;
     if (buttonValue != null && appSettings.buttonSettings[widget.buttonId].inverted) {
-      buttonValue = 4096 - buttonValue;
+      buttonValue = (4096 - buttonValue) * 100 ~/ 4096;
     }
     var newButtonHysteresisState = buttonHysteresisState;
     if (buttonHysteresisState == false && buttonValue != null && buttonValue > appSettings.buttonSettings[widget.buttonId].upperThreshold) {

@@ -94,7 +94,13 @@ class ChannelList extends ConsumerWidget {
                   lang.reset,
                   style: headerStyle,
                 )),
-            const SizedBox(width: 100)
+            SizedBox(
+                width: 100,
+                height: 60,
+                child: Text(
+                  lang.profiles,
+                  style: headerStyle,
+                )),
           ]),
       for (var i = 0; i < appSettings.channelSettings.length; i++)
         ChannelItem(

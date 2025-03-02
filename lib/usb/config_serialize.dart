@@ -1,6 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:gcrdeviceconfigurator/data/app_settings.dart';
 
+int to4095(int value) {
+  return (value * 4095 / 100).round().clamp(0, 4095);
+}
+
 /// Serializes the current configuration of the device into a buffer.
 Uint8List serializeConfig(AppSettings appSettings) {
   final buffer = WriteBuffer();
@@ -27,8 +31,8 @@ Uint8List serializeConfig(AppSettings appSettings) {
     } else {
       buffer.putUint8(1); // Axis used
     }
-    buffer.putUint16(appSettings.channelSettings[i].minValue); // Min value
-    buffer.putUint16(appSettings.channelSettings[i].maxValue); // Max value
+    buffer.putUint16(to4095(appSettings.channelSettings[i].minValue)); // Min value
+    buffer.putUint16(to4095(appSettings.channelSettings[i].maxValue)); // Max value
 
     var channelForSensorDataFusion = -1;
     // Sensor data fusion is disabled now
