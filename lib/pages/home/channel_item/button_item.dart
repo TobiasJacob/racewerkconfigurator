@@ -179,6 +179,9 @@ class _ButtonItemState extends ConsumerState<ButtonItem> {
                     await appSettingsNotifier.save();
                   }),
             ),
+            const SizedBox(
+              width: 100,
+            ),
             SizedBox(
               width: 100,
               child: IconButton(
