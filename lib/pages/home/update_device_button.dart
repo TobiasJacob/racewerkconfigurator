@@ -9,12 +9,12 @@ class UpdateDeviceWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final usbStatus = ref.watch(usbProvider);
 
-    final isConnected = usbStatus.maybeWhen(
+    final firmwareData = usbStatus.maybeWhen(
       data: (data) => data.maybeMap(
-        connected: (s) => true,
-        orElse: () => false,
+        connected: (s) => s.firmwareData,
+        orElse: () => null,
       ),
-      orElse: () => false,
+      orElse: () => null,
     );
 
     return Row(
@@ -24,14 +24,14 @@ class UpdateDeviceWidget extends ConsumerWidget {
           width: 12.0,
           height: 12.0,
           decoration: BoxDecoration(
-            color: isConnected
+            color: firmwareData != null
                 ? const Color.fromRGBO(80, 254, 0, 1)
                 : const Color.fromRGBO(238, 65, 35, 1),
             shape: BoxShape.circle,
           ),
         ),
         const SizedBox(width: 8.0),
-        Text(isConnected ? "Connected" : "No device found"),
+        Text(firmwareData != null ? "Connected v${firmwareData.revision}.${firmwareData.major}.${firmwareData.minor}" : "No device found"),
       ],
     );
   }

@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:gcrdeviceconfigurator/data/app_settings.dart';
+import 'package:gcrdeviceconfigurator/usb/firmware_version.dart';
 
 import 'gcr_device.dart';
 
@@ -11,6 +12,7 @@ class UsbData with _$UsbData {
   @Assert('currentValues.length == 10')
   factory UsbData.connected({
     required List<int> currentValues,
+    required FirmwareData firmwareData,
     required GcrUsbHidDevice device,
   }) = _UsbConnected;
 

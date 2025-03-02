@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:gcrdeviceconfigurator/usb/firmware_version.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'gcr_device.dart';
@@ -10,17 +11,16 @@ const simulate = true;
 
 Stream<UsbData> realUsbProvider(ref) async* {
     var state = const UsbData.disconnected();
-    GcrUsbHidDevice device = GcrUsbHidDevice();
     while (true) {
       await state.map(
         connected: (connected) async {
           try {
-            final currentValues = await device.receiveRawADCValues();
-            state = UsbData.connected(currentValues: currentValues, device: device);
+            final currentValues = await connected.device.receiveRawADCValues();
+            state = UsbData.connected(currentValues: currentValues, firmwareData: connected.firmwareData, device: connected.device);
           } catch (e) {
             state = const UsbData.disconnected();
             try {
-              await device.close();
+              await connected.device.close();
             } catch (e) {
               debugPrint("Error closing device: $e");
             }
@@ -29,9 +29,11 @@ Stream<UsbData> realUsbProvider(ref) async* {
         },
         disconnected: (disconnected) async {
           try {
+            GcrUsbHidDevice device = GcrUsbHidDevice();
             await device.open();
+            final firmwareData = await device.getFirmwareInformation();
             final currentValues = await device.receiveRawADCValues();
-            state = UsbData.connected(currentValues: currentValues, device: device);
+            state = UsbData.connected(currentValues: currentValues, firmwareData: firmwareData, device: device);
             // ignore: empty_catches
           } catch (e) {
             debugPrint("Error opening device: $e");
@@ -62,10 +64,10 @@ Stream<UsbData> simulatedUsbProvider(ref) async* {
               newVal += (4096 / 2 - newVal) * 0.002;
               newValues.add(max(min(newVal.round(), 4096), -4096));
             }
-            return UsbData.connected(currentValues: newValues, device: connected.device);
+            return UsbData.connected(currentValues: newValues, firmwareData: FirmwareData(DeviceId.gcrboard1, 3, 1, 1), device: connected.device);
           },
           orElse: () =>
-              UsbData.connected(currentValues: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], device: GcrUsbHidDevice()));
+              UsbData.connected(currentValues: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], firmwareData: FirmwareData(DeviceId.gcrboard1, 3, 1, 1), device: GcrUsbHidDevice()));
       yield state;
       await Future.delayed(const Duration(milliseconds: 100));
     }

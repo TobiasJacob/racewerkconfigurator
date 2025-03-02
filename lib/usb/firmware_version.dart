@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 
 enum DeviceId {
-  unknown,
-  gcrboard1;
+  unknown, // 0
+  gcrboard1; // 1
 }
 
 
