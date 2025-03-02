@@ -135,6 +135,9 @@ class LanguageEn extends Languages {
   String get off => "Off";
 
   @override
+  String get smoothing => "Smoothing";
+
+  @override
   String editProfile(String profile) {
     return "Edit $profile";
   }

@@ -160,7 +160,10 @@ class _ChannelPageState extends ConsumerState<ChannelPage> {
                                     autoUpdate = value!;
                                   });
                                 }),
-                          )
+                          ),
+                          SettingsTile(
+                              title: lang.smoothing,
+                              child: ChannelSmoothing(channelId: channelId)),
                         ],
                       ),
                     )
@@ -182,7 +185,10 @@ class _ChannelPageState extends ConsumerState<ChannelPage> {
                                 child: MaterialButton(
                                   onPressed: () async {
                                     // Alert dialog to confirm the change
-                                    final yes = await showYesNoDialog(context, lang.overwriteProfile, lang.wantToOverwriteProfile);
+                                    final yes = await showYesNoDialog(
+                                        context,
+                                        lang.overwriteProfile,
+                                        lang.wantToOverwriteProfile);
                                     if (yes != true) {
                                       return;
                                     }

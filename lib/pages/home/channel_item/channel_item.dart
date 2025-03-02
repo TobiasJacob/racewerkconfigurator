@@ -114,6 +114,10 @@ class _ChannelItemState extends ConsumerState<ChannelItem> {
             ),
             SizedBox(
               width: 100,
+              child: ChannelSmoothing(channelId: widget.channelId),
+            ),
+            SizedBox(
+              width: 100,
               child: IconButton(
                 icon: const Icon(Icons.restore),
                 onPressed: () async {

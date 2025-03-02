@@ -46,6 +46,7 @@ abstract class Languages {
   String get nSlashA;
   String get on;
   String get off;
+  String get smoothing;
 
   // Profile Page
   String editProfile(String profile);

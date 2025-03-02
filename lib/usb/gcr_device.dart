@@ -9,7 +9,7 @@ import 'package:gcrdeviceconfigurator/usb/firmware_version.dart';
 const int vendorId = 1155;
 const int productId = 22353;
 const int packetSize = 64;
-const int serializedConfigLength = 544;
+const int serializedConfigLength = 556;
 
 // Should be the same as in gcrdevice/UserCode/usb_hid_comm.h. Note that gcrdevice is in another repo.
 enum HidReportIdDeviceToHost {

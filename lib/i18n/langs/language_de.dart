@@ -135,6 +135,9 @@ class LanguageDe extends Languages {
   String get off => "Aus";
 
   @override
+  String get smoothing => "Glättung";
+
+  @override
   String editProfile(String profile) {
     return "Bearbeite $profile";
   }
