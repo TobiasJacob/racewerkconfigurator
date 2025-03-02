@@ -152,6 +152,12 @@ class LanguageDe extends Languages {
   String get wantToSaveSettings => "Möchten Sie die Einstellungen speichern?";
 
   @override
+  String get overwriteProfile => "Profil überschreiben";
+
+  @override
+  String get wantToOverwriteProfile => "Möchten Sie das Profil überschreiben?";
+
+  @override
   String channel(int index) {
     return "Kanal $index";
   }

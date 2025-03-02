@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gcrdeviceconfigurator/data/activate_settings.dart';
 import 'package:gcrdeviceconfigurator/data/channel_provider.dart';
 import 'package:gcrdeviceconfigurator/data/profile_axis.dart';
 import 'package:gcrdeviceconfigurator/data/settings_provider.dart';
-import 'package:gcrdeviceconfigurator/dialogs/ok_dialog.dart';
+import 'package:gcrdeviceconfigurator/dialogs/yes_no_dialog.dart';
 import 'package:gcrdeviceconfigurator/pages/home/channel_item/editbox.dart';
 import 'package:gcrdeviceconfigurator/pages/home/channels/chart/chart.dart';
 import 'package:gcrdeviceconfigurator/pages/settings/settings_tile.dart';
@@ -57,29 +56,22 @@ class _ChannelPageState extends ConsumerState<ChannelPage> {
             .getY(calibratedValueX)
         : null;
 
-    final rawValueConverted = rawValue != null ? (rawValue * 100 ~/ 4096) : null;
+    final rawValueConverted =
+        rawValue != null ? (rawValue * 100 ~/ 4096) : null;
 
     if (autoUpdate) {
       if (rawValueConverted != null &&
-          rawValueConverted < channel.minValue &&
-          rawValueConverted > channel.maxValue) {
+          rawValueConverted + 1 < channel.minValue) {
         Future(() {
           settingsNotifier.update(appSettings.updateChannel(
-              channelId, channel.updateMinMaxValue(rawValueConverted, rawValueConverted)));
-          // await activateSettings(context, ref);
-          // await appSettingsNotifier.save();
+              channelId, channel.updateMinValue(rawValueConverted + 1)));
         });
       }
-      if (rawValueConverted != null && rawValueConverted < channel.minValue) {
+      if (rawValueConverted != null &&
+          rawValueConverted - 1 > channel.maxValue) {
         Future(() {
           settingsNotifier.update(appSettings.updateChannel(
-              channelId, channel.updateMinValue(rawValueConverted)));
-        });
-      }
-      if (rawValueConverted != null && rawValueConverted > channel.maxValue) {
-        Future(() {
-          settingsNotifier.update(appSettings.updateChannel(
-              channelId, channel.updateMaxValue(rawValueConverted)));
+              channelId, channel.updateMaxValue(rawValueConverted - 1)));
         });
       }
     }
@@ -153,7 +145,16 @@ class _ChannelPageState extends ConsumerState<ChannelPage> {
                                         appSettings.updateChannel(
                                             channelId,
                                             channel.updateMinMaxValue(
-                                                ((rawValue ?? 2048) * 100 ~/ 4096 - 1).clamp(0, 100), ((rawValue ?? 2048) * 100 ~/ 4096 + 1).clamp(0, 100))));
+                                                ((rawValue ?? 2048) *
+                                                            100 ~/
+                                                            4096 -
+                                                        1)
+                                                    .clamp(0, 100),
+                                                ((rawValue ?? 2048) *
+                                                            100 ~/
+                                                            4096 +
+                                                        1)
+                                                    .clamp(0, 100))));
                                   }
                                   setState(() {
                                     autoUpdate = value!;
@@ -171,27 +172,36 @@ class _ChannelPageState extends ConsumerState<ChannelPage> {
                 child: Row(
                   children: [
                     const Expanded(flex: 1, child: Chart()),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        for (var i = 0; i < 6; i++)
-                          MaterialButton(
-                            onPressed: () {
-                              settingsNotifier.updateChannel(channel
-                                  .updateProfileAxis(ProfileAxis.preset(i)));
-                            },
-                            child: Container(
-                              width: 80,
-                              height: 80,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image:
-                                        AssetImage('images/preset${i + 1}.png'),
-                                    fit: BoxFit.fill),
-                              ),
-                            ),
-                          )
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          for (var i = 0; i < 6; i++)
+                            Expanded(
+                                flex: 1,
+                                child: MaterialButton(
+                                  onPressed: () async {
+                                    // Alert dialog to confirm the change
+                                    final yes = await showYesNoDialog(context, lang.overwriteProfile, lang.wantToOverwriteProfile);
+                                    if (yes != true) {
+                                      return;
+                                    }
+                                    settingsNotifier.updateChannel(
+                                        channel.updateProfileAxis(
+                                            ProfileAxis.preset(i)));
+                                  },
+                                  child: Container(
+                                    width: 80,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'images/preset${i + 1}.png'),
+                                          fit: BoxFit.fill),
+                                    ),
+                                  ),
+                                )),
+                        ],
+                      ),
                     ),
                     const SizedBox(width: 20)
                   ],

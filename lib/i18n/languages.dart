@@ -56,6 +56,10 @@ abstract class Languages {
   String get saveSettings;
   String get wantToSaveSettings;
 
+  // Overwrite Profile
+  String get overwriteProfile;
+  String get wantToOverwriteProfile;
+
   String channel(int index);
   String alreadyInUse(ChannelUsage usage);
 

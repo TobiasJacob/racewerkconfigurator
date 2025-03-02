@@ -152,6 +152,12 @@ class LanguageEn extends Languages {
   String get wantToSaveSettings => "Do you want to save the settings?";
 
   @override
+  String get overwriteProfile => "Overwrite Profile";
+
+  @override
+  String get wantToOverwriteProfile => "Do you want to overwrite the profile?";
+
+  @override
   String channel(int index) {
     return "Channel $index";
   }
