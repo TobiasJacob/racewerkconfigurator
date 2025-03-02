@@ -21,11 +21,11 @@ jobs:
       - uses: vimtor/action-zip@v1
         with:
           files: build/windows/x64/runner/Release LICENSE.txt
-          dest: GetCloserRacingDeviceConfigurator.zip
+          dest: RacewerkDeviceConfigurator.zip
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
           files: |
             LICENSE.txt
-            GetCloserRacingDeviceConfigurator.zip
+            RacewerkDeviceConfigurator.zip
