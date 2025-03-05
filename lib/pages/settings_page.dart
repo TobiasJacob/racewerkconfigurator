@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gcrdeviceconfigurator/data/app_settings.dart';
-import 'package:gcrdeviceconfigurator/data/settings_provider.dart';
-import 'package:gcrdeviceconfigurator/dialogs/yes_no_dialog.dart';
-import 'package:gcrdeviceconfigurator/pages/settings/language_settings_tile.dart';
+import 'package:racewerkconfigurator/data/app_settings.dart';
+import 'package:racewerkconfigurator/data/settings_provider.dart';
+import 'package:racewerkconfigurator/dialogs/yes_no_dialog.dart';
+import 'package:racewerkconfigurator/pages/settings/language_settings_tile.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../i18n/languages.dart';

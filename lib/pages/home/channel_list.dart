@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gcrdeviceconfigurator/data/settings_provider.dart';
-import 'package:gcrdeviceconfigurator/i18n/languages.dart';
-import 'package:gcrdeviceconfigurator/pages/home/channel_item/button_item.dart';
-import 'package:gcrdeviceconfigurator/pages/home/channel_item/channel_item.dart';
+import 'package:racewerkconfigurator/data/settings_provider.dart';
+import 'package:racewerkconfigurator/i18n/languages.dart';
+import 'package:racewerkconfigurator/pages/home/channel_item/button_item.dart';
+import 'package:racewerkconfigurator/pages/home/channel_item/channel_item.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ChannelList extends ConsumerWidget {

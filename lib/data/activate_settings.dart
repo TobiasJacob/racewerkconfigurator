@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gcrdeviceconfigurator/usb/usb_provider.dart';
+import 'package:racewerkconfigurator/usb/usb_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'settings_provider.dart';

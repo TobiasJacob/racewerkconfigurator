@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gcrdeviceconfigurator/data/settings_provider.dart';
-import 'package:gcrdeviceconfigurator/i18n/languages.dart';
-import 'package:gcrdeviceconfigurator/pages/home/channel_item/bar_painter.dart';
-import 'package:gcrdeviceconfigurator/usb/usb_data.dart';
-import 'package:gcrdeviceconfigurator/usb/usb_provider.dart';
+import 'package:racewerkconfigurator/data/settings_provider.dart';
+import 'package:racewerkconfigurator/i18n/languages.dart';
+import 'package:racewerkconfigurator/pages/home/channel_item/bar_painter.dart';
+import 'package:racewerkconfigurator/usb/usb_data.dart';
+import 'package:racewerkconfigurator/usb/usb_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ValueBar extends ConsumerWidget {

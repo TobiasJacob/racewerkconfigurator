@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:gcrdeviceconfigurator/data/activate_settings.dart';
-import 'package:gcrdeviceconfigurator/data/app_settings.dart';
-import 'package:gcrdeviceconfigurator/data/channel.dart';
-import 'package:gcrdeviceconfigurator/data/channel_provider.dart';
-import 'package:gcrdeviceconfigurator/data/settings_provider.dart';
-import 'package:gcrdeviceconfigurator/i18n/languages.dart';
-import 'package:gcrdeviceconfigurator/pages/home/channel_item/editbox.dart';
-import 'package:gcrdeviceconfigurator/pages/home/channel_item/value_bar.dart';
-import 'package:gcrdeviceconfigurator/pages/home/channels/channel_page.dart';
+import 'package:racewerkconfigurator/data/activate_settings.dart';
+import 'package:racewerkconfigurator/data/app_settings.dart';
+import 'package:racewerkconfigurator/data/channel.dart';
+import 'package:racewerkconfigurator/data/channel_provider.dart';
+import 'package:racewerkconfigurator/data/settings_provider.dart';
+import 'package:racewerkconfigurator/i18n/languages.dart';
+import 'package:racewerkconfigurator/pages/home/channel_item/editbox.dart';
+import 'package:racewerkconfigurator/pages/home/channel_item/value_bar.dart';
+import 'package:racewerkconfigurator/pages/home/channels/channel_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ChannelItem extends ConsumerStatefulWidget {

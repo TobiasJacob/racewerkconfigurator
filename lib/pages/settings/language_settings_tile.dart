@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gcrdeviceconfigurator/i18n/languages.dart';
-import 'package:gcrdeviceconfigurator/pages/settings/settings_tile.dart';
+import 'package:racewerkconfigurator/i18n/languages.dart';
+import 'package:racewerkconfigurator/pages/settings/settings_tile.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/settings_provider.dart';

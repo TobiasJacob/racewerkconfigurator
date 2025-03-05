@@ -1,4 +1,4 @@
-import 'package:gcrdeviceconfigurator/data/app_settings.dart';
+import 'package:racewerkconfigurator/data/app_settings.dart';
 
 import '../languages.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gcrdeviceconfigurator/data/app_settings.dart';
+import 'package:racewerkconfigurator/data/app_settings.dart';
 
 abstract class Languages {
 

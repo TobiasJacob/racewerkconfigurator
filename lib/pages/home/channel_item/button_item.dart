@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gcrdeviceconfigurator/data/activate_settings.dart';
-import 'package:gcrdeviceconfigurator/data/app_settings.dart';
-import 'package:gcrdeviceconfigurator/data/button.dart';
-import 'package:gcrdeviceconfigurator/data/settings_provider.dart';
-// import 'package:gcrdeviceconfigurator/dialogs/ok_dialog.dart';
-import 'package:gcrdeviceconfigurator/i18n/languages.dart';
-import 'package:gcrdeviceconfigurator/pages/home/channel_item/button_sim_bar.dart';
+import 'package:racewerkconfigurator/data/activate_settings.dart';
+import 'package:racewerkconfigurator/data/app_settings.dart';
+import 'package:racewerkconfigurator/data/button.dart';
+import 'package:racewerkconfigurator/data/settings_provider.dart';
+// import 'package:racewerkconfigurator/dialogs/ok_dialog.dart';
+import 'package:racewerkconfigurator/i18n/languages.dart';
+import 'package:racewerkconfigurator/pages/home/channel_item/button_sim_bar.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ButtonItem extends ConsumerStatefulWidget {

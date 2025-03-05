@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:gcrdeviceconfigurator/data/settings_provider.dart';
+import 'package:racewerkconfigurator/data/settings_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../i18n/app_localization_delegate.dart';

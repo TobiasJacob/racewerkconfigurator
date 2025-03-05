@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
-import 'package:gcrdeviceconfigurator/data/app_settings.dart';
+import 'package:racewerkconfigurator/data/app_settings.dart';
 
 int to4095(int value) {
   return (value * 4095 / 100).round().clamp(0, 4095);

@@ -1,5 +1,5 @@
 
-import 'package:gcrdeviceconfigurator/data/settings_provider.dart';
+import 'package:racewerkconfigurator/data/settings_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final channelIdProvider = StateProvider((ref) => 0);

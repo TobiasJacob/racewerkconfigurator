@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:gcrdeviceconfigurator/usb/firmware_version.dart';
+import 'package:racewerkconfigurator/usb/firmware_version.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'gcr_device.dart';

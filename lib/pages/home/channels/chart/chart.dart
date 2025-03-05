@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gcrdeviceconfigurator/data/channel_provider.dart';
-import 'package:gcrdeviceconfigurator/data/data_point.dart';
-import 'package:gcrdeviceconfigurator/data/settings_provider.dart';
-import 'package:gcrdeviceconfigurator/usb/usb_data.dart';
-import 'package:gcrdeviceconfigurator/usb/usb_provider.dart';
+import 'package:racewerkconfigurator/data/channel_provider.dart';
+import 'package:racewerkconfigurator/data/data_point.dart';
+import 'package:racewerkconfigurator/data/settings_provider.dart';
+import 'package:racewerkconfigurator/usb/usb_data.dart';
+import 'package:racewerkconfigurator/usb/usb_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'chart_button.dart';

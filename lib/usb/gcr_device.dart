@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:dartusbhid/enumerate.dart';
 import 'package:dartusbhid/open_device.dart';
 import 'package:flutter/foundation.dart';
-import 'package:gcrdeviceconfigurator/usb/firmware_version.dart';
+import 'package:racewerkconfigurator/usb/firmware_version.dart';
 
 const int vendorId = 1155;
 const int productId = 22353;

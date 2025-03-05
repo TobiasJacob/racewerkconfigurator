@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gcrdeviceconfigurator/data/profile_axis.dart';
+import 'package:racewerkconfigurator/data/profile_axis.dart';
 
 class ChartPainter extends CustomPainter {
   final ProfileAxis axis;

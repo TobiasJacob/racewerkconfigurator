@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gcrdeviceconfigurator/i18n/langs/language_de.dart';
+import 'package:racewerkconfigurator/i18n/langs/language_de.dart';
 
 import 'langs/language_en.dart';
 import 'languages.dart';

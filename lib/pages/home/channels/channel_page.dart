@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:gcrdeviceconfigurator/data/activate_settings.dart';
-import 'package:gcrdeviceconfigurator/data/channel_provider.dart';
-import 'package:gcrdeviceconfigurator/data/profile_axis.dart';
-import 'package:gcrdeviceconfigurator/data/settings_provider.dart';
-import 'package:gcrdeviceconfigurator/dialogs/yes_no_dialog.dart';
-import 'package:gcrdeviceconfigurator/pages/home/channel_item/editbox.dart';
-import 'package:gcrdeviceconfigurator/pages/home/channels/chart/chart.dart';
-import 'package:gcrdeviceconfigurator/pages/settings/settings_tile.dart';
-import 'package:gcrdeviceconfigurator/usb/usb_data.dart';
-import 'package:gcrdeviceconfigurator/usb/usb_provider.dart';
+import 'package:racewerkconfigurator/data/activate_settings.dart';
+import 'package:racewerkconfigurator/data/channel_provider.dart';
+import 'package:racewerkconfigurator/data/profile_axis.dart';
+import 'package:racewerkconfigurator/data/settings_provider.dart';
+import 'package:racewerkconfigurator/dialogs/yes_no_dialog.dart';
+import 'package:racewerkconfigurator/pages/home/channel_item/editbox.dart';
+import 'package:racewerkconfigurator/pages/home/channels/chart/chart.dart';
+import 'package:racewerkconfigurator/pages/settings/settings_tile.dart';
+import 'package:racewerkconfigurator/usb/usb_data.dart';
+import 'package:racewerkconfigurator/usb/usb_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../i18n/languages.dart';

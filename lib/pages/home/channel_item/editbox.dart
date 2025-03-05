@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gcrdeviceconfigurator/data/activate_settings.dart';
-import 'package:gcrdeviceconfigurator/data/settings_provider.dart';
+import 'package:racewerkconfigurator/data/activate_settings.dart';
+import 'package:racewerkconfigurator/data/settings_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
 

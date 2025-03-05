@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:gcrdeviceconfigurator/root_widget.dart';
+import 'package:racewerkconfigurator/root_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:window_size/window_size.dart';
 

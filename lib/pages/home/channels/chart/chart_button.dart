@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gcrdeviceconfigurator/data/data_point.dart';
+import 'package:racewerkconfigurator/data/data_point.dart';
 
 class ChartButton extends StatelessWidget {
   final DataPoint dataPoint;

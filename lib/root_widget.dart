@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:gcrdeviceconfigurator/apps/app_loading.dart';
-import 'package:gcrdeviceconfigurator/data/settings_provider.dart';
-import 'package:gcrdeviceconfigurator/pages/home_page.dart';
+import 'package:racewerkconfigurator/apps/app_loading.dart';
+import 'package:racewerkconfigurator/data/settings_provider.dart';
+import 'package:racewerkconfigurator/pages/home_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'apps/app_data.dart';

@@ -2,9 +2,9 @@
 /// Run with `flutter run -t devicetests\ping_pong.dart`
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:gcrdeviceconfigurator/data/app_settings.dart';
-import 'package:gcrdeviceconfigurator/usb/config_serialize.dart';
-import 'package:gcrdeviceconfigurator/usb/gcr_device.dart';
+import 'package:racewerkconfigurator/data/app_settings.dart';
+import 'package:racewerkconfigurator/usb/config_serialize.dart';
+import 'package:racewerkconfigurator/usb/gcr_device.dart';
 
 //
 void test() async {

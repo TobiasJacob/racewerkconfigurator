@@ -4,16 +4,16 @@
 // import 'package:flutter/services.dart';
 // import 'package:flutter_localizations/flutter_localizations.dart';
 // import 'package:flutter_test/flutter_test.dart';
-// import 'package:gcrdeviceconfigurator/apps/app_data.dart';
-// import 'package:gcrdeviceconfigurator/i18n/app_localization_delegate.dart';
-// import 'package:gcrdeviceconfigurator/i18n/langs/language_de.dart';
-// import 'package:gcrdeviceconfigurator/i18n/langs/language_en.dart';
-// import 'package:gcrdeviceconfigurator/i18n/languages.dart';
-// import 'package:gcrdeviceconfigurator/main_data_provider_widget.dart';
-// import 'package:gcrdeviceconfigurator/main_data_provider.dart';
-// import 'package:gcrdeviceconfigurator/pages/home/profile_tile.dart';
-// import 'package:gcrdeviceconfigurator/pages/profile_page.dart';
-// import 'package:gcrdeviceconfigurator/pages/settings_page.dart';
+// import 'package:racewerkconfigurator/apps/app_data.dart';
+// import 'package:racewerkconfigurator/i18n/app_localization_delegate.dart';
+// import 'package:racewerkconfigurator/i18n/langs/language_de.dart';
+// import 'package:racewerkconfigurator/i18n/langs/language_en.dart';
+// import 'package:racewerkconfigurator/i18n/languages.dart';
+// import 'package:racewerkconfigurator/main_data_provider_widget.dart';
+// import 'package:racewerkconfigurator/main_data_provider.dart';
+// import 'package:racewerkconfigurator/pages/home/profile_tile.dart';
+// import 'package:racewerkconfigurator/pages/profile_page.dart';
+// import 'package:racewerkconfigurator/pages/settings_page.dart';
 // import 'package:path_provider/path_provider.dart';
 // import 'package:provider/provider.dart';
 

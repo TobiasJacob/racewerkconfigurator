@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'package:gcrdeviceconfigurator/data/button.dart';
+import 'package:racewerkconfigurator/data/button.dart';
 
 import 'channel.dart';
 

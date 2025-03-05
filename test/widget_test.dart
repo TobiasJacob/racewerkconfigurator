@@ -7,15 +7,15 @@
 
 // import 'package:flutter/material.dart';
 // import 'package:flutter_test/flutter_test.dart';
-// import 'package:gcrdeviceconfigurator/apps/app_data.dart';
-// import 'package:gcrdeviceconfigurator/main_data_provider_widget.dart';
-// // import 'package:gcrdeviceconfigurator/apps/app_loading.dart';
-// import 'package:gcrdeviceconfigurator/main_data_provider.dart';
-// import 'package:gcrdeviceconfigurator/pages/home_page.dart';
-// import 'package:gcrdeviceconfigurator/pages/profile_page.dart';
-// import 'package:gcrdeviceconfigurator/pages/settings_page.dart';
+// import 'package:racewerkconfigurator/apps/app_data.dart';
+// import 'package:racewerkconfigurator/main_data_provider_widget.dart';
+// // import 'package:racewerkconfigurator/apps/app_loading.dart';
+// import 'package:racewerkconfigurator/main_data_provider.dart';
+// import 'package:racewerkconfigurator/pages/home_page.dart';
+// import 'package:racewerkconfigurator/pages/profile_page.dart';
+// import 'package:racewerkconfigurator/pages/settings_page.dart';
 
-// // import 'package:gcrdeviceconfigurator/root_widget.dart';
+// // import 'package:racewerkconfigurator/root_widget.dart';
 
 // void main() {
 //   // testWidgets('Initial screen is loading screen', (WidgetTester tester) async {

@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'package:gcrdeviceconfigurator/data/app_settings.dart';
-import 'package:gcrdeviceconfigurator/usb/firmware_version.dart';
+import 'package:racewerkconfigurator/data/app_settings.dart';
+import 'package:racewerkconfigurator/usb/firmware_version.dart';
 
 import 'gcr_device.dart';
 
