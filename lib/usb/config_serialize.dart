@@ -54,9 +54,9 @@ Uint8List serializeConfig(AppSettings appSettings) {
 
     // Use exp scaling
     final smoothing = appSettings.channelSettings[i].smoothing;
-    // final expScaling = pow(2, smoothing / 100 * 12) * 16; // 16 is the denominator (4 bits), and 12 bits are used for the time constant (4096 means 4096ms half time for max smoothing)
+    final expScaling = pow(2, smoothing / 100 * 12) * 16; // 16 is the denominator (4 bits), and 12 bits are used for the time constant (4096 means 4096ms half time for max smoothing)
     // This is a smoother version since the original version is smoothing way too much
-    final expScaling = pow(2, smoothing / 1000 * 12) * 16;
+    // final expScaling = pow(2, smoothing / 1000 * 12) * 16;
     final clamped = expScaling.round().clamp(0, 65536);
     buffer.putUint16(clamped); // Smoothing
 
