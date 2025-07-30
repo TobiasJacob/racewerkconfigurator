@@ -22,6 +22,9 @@ class ChannelPage extends ConsumerStatefulWidget {
 
 class _ChannelPageState extends ConsumerState<ChannelPage> {
   bool autoUpdate = false;
+  int? autoUpdateStartValue;
+  bool autoUpdateHot =
+      false; // This is used to make sure that there is a deadzone after pushing the pedal
 
   @override
   void initState() {
@@ -59,7 +62,23 @@ class _ChannelPageState extends ConsumerState<ChannelPage> {
     final rawValueConverted =
         rawValue != null ? (rawValue * 100 ~/ 4096) : null;
 
-    if (autoUpdate) {
+    if (!autoUpdateHot &&
+        autoUpdate &&
+        rawValue != null &&
+        autoUpdateStartValue != null) {
+      if ((autoUpdateStartValue! - rawValue).abs() > 128) {
+        Future(() {
+          settingsNotifier.update(appSettings.updateChannel(
+              channelId,
+              channel.updateMinMaxValue(
+                  ((rawValue) * 100 ~/ 4096 - 1).clamp(0, 100),
+                  ((rawValue) * 100 ~/ 4096 + 1).clamp(0, 100))));
+        });
+        autoUpdateHot = true;
+      }
+    }
+
+    if (autoUpdateHot) {
       if (rawValueConverted != null &&
           rawValueConverted + 1 < channel.minValue) {
         Future(() {
@@ -141,21 +160,9 @@ class _ChannelPageState extends ConsumerState<ChannelPage> {
                                 value: autoUpdate,
                                 onChanged: (value) {
                                   if (value == true) {
-                                    settingsNotifier.update(
-                                        appSettings.updateChannel(
-                                            channelId,
-                                            channel.updateMinMaxValue(
-                                                ((rawValue ?? 2048) *
-                                                            100 ~/
-                                                            4096 -
-                                                        1)
-                                                    .clamp(0, 100),
-                                                ((rawValue ?? 2048) *
-                                                            100 ~/
-                                                            4096 +
-                                                        1)
-                                                    .clamp(0, 100))));
+                                    autoUpdateStartValue = rawValue;
                                   }
+                                  autoUpdateHot = false;
                                   setState(() {
                                     autoUpdate = value!;
                                   });
